@@ -1,0 +1,38 @@
+/*
+ * drv8311.h
+ *
+ *  Created on: 2 mai 2022
+ *      Author: be06
+ */
+
+#ifndef INC_DRV8311_H_
+#define INC_DRV8311_H_
+
+
+#define DRV8311_REG_DEV_STS1			0x00
+#define	DRV8311_REG_OT_STS				0x04
+#define	DRV8311_REG_SUP_STS				0x05
+#define	DRV8311_REG_DRV_STS				0x06
+#define	DRV8311_REG_SYS_STS				0x07
+#define	DRV8311_REG_PWM_SYNC_PRD		0x0C
+#define	DRV8311_REG_FLT_MODE			0x10
+#define	DRV8311_REG_SYSF_CTRL			0x12
+#define	DRV8311_REG_DRVF_CTRL			0x13
+#define	DRV8311_REG_FLT_TCTRL			0x16
+#define	DRV8311_REG_FLT_CLR				0x17
+#define	DRV8311_REG_PWMG_PERIOD			0x18
+#define	DRV8311_REG_PWMG_A_DUTY			0x19
+#define	DRV8311_REG_PWMG_B_DUTY			0x1A
+#define	DRV8311_REG_PWMG_C_DUTY			0x1B
+#define	DRV8311_REG_PWM_STATE			0x1C
+#define	DRV8311_REG_PWMG_CTRL			0x1D
+#define	DRV8311_REG_PWM_CTRL1			0x20
+#define	DRV8311_REG_DRV_CTRL			0x22
+#define	DRV8311_REG_CSA_CTRL			0x23
+#define	DRV8311_REG_SYS_CTRL			0x3F
+
+void DRV_Init(void);
+
+#endif /* INC_DRV8311_H_ */
+
+
