@@ -127,11 +127,12 @@ int main(void)
 
   INIT_IMU();
 
-
   //INTERRUPTS
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim3);
 
+
+  Fusion_datas_init();
 
   /* USER CODE END 2 */
 
@@ -145,7 +146,7 @@ int main(void)
 	acc_IMU = Get_AXIS_GYRO__IMU();
 	gyro_IMU = Get_AXIS_ACC__IMU();
 
-	MotionDI_manager_init(100);
+
 	}
   /* USER CODE END 3 */
 }

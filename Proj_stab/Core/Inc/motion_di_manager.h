@@ -47,6 +47,11 @@ void MotionDI_reset_gyro_calibration(void);
 void MotionDI_manager_run(MDI_input_t *data_in, MDI_output_t *data_out);
 void MotionDI_manager_get_version(char *version, int *length);
 
+
+
+void BSP_SENSOR_ACC_GetOrientation(char *Orientation);
+void BSP_SENSOR_GYR_GetOrientation(char *Orientation);
+
 #ifdef __cplusplus
 }
 #endif

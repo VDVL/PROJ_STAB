@@ -39,6 +39,10 @@ MDI_cal_type_t GyrCalMode = MDI_CAL_NONE;
 #define SAMPLETODISCARD  15
 #define DECIMATION  1U
 
+
+
+
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static MDI_knobs_t iKnobs;
@@ -66,8 +70,8 @@ void MotionDI_manager_init(float freq)
   ipKnobs->AccKnob.CalType = MDI_CAL_CONTINUOUS;
   ipKnobs->GyrKnob.CalType = MDI_CAL_CONTINUOUS;
 
-  //BSP_SENSOR_ACC_GetOrientation(ipKnobs->AccOrientation);
-  //BSP_SENSOR_GYR_GetOrientation(ipKnobs->GyroOrientation);
+  BSP_SENSOR_ACC_GetOrientation(ipKnobs->AccOrientation);
+  BSP_SENSOR_GYR_GetOrientation(ipKnobs->GyroOrientation);
 
   ipKnobs->SFKnob.output_type = MDI_ENGINE_OUTPUT_ENU;
   ipKnobs->SFKnob.modx = DECIMATION;
@@ -210,6 +214,41 @@ static void float_array_set(float array[], float value, uint32_t count)
     array[i] = value;
   }
 }
+
+
+
+
+
+/**
+  * @brief  Get accelerometer sensor orientation
+  * @param  Orientation Pointer to sensor orientation
+  * @retval None
+  */
+void BSP_SENSOR_ACC_GetOrientation(char *Orientation)
+{
+  Orientation[0] = 's';
+  Orientation[1] = 'e';
+  Orientation[2] = 'u';
+}
+
+/**
+  * @brief  Get gyroscope sensor orientation
+  * @param  Orientation Pointer to sensor orientation
+  * @retval None
+  */
+void BSP_SENSOR_GYR_GetOrientation(char *Orientation)
+{
+  Orientation[0] = 's';
+  Orientation[1] = 'e';
+  Orientation[2] = 'u';
+}
+
+
+
+
+
+
+
 
 /**
  * @}
