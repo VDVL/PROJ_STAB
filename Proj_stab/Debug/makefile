@@ -61,7 +61,7 @@ main-build: Proj_stab.elf secondary-outputs
 
 # Tool invocations
 Proj_stab.elf Proj_stab.map: $(OBJS) $(USER_OBJS) C:\Users\be06.BREIZELEC\Desktop\PROJ_STAB\Proj_stab\STM32L476RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Proj_stab.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\be06.BREIZELEC\Desktop\PROJ_STAB\Proj_stab\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Proj_stab.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "Proj_stab.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\be06.BREIZELEC\Desktop\PROJ_STAB\Proj_stab\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Proj_stab.map" -Wl,--gc-sections -static -L"C:\Users\be06.BREIZELEC\STM32Cube\Repository\Packs\STMicroelectronics\X-CUBE-MEMS1\9.2.0\Middlewares\ST\STM32_MotionDI_Library\Lib" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

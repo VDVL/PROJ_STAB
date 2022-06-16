@@ -1,0 +1,12 @@
+../Core/Src/motion_di_manager.c:60:6:MotionDI_manager_init	16	static
+../Core/Src/motion_di_manager.c:86:6:MotionDI_get_acc_calibration_mode	16	static
+../Core/Src/motion_di_manager.c:97:6:MotionDI_set_acc_calibration_mode	16	static
+../Core/Src/motion_di_manager.c:109:6:MotionDI_get_acc_calibration	16	static
+../Core/Src/motion_di_manager.c:118:6:MotionDI_reset_acc_calibration	8	static
+../Core/Src/motion_di_manager.c:128:6:MotionDI_get_gyro_calibration_mode	16	static
+../Core/Src/motion_di_manager.c:139:6:MotionDI_set_gyro_calibration_mode	16	static
+../Core/Src/motion_di_manager.c:151:6:MotionDI_get_gyro_calibration	16	static
+../Core/Src/motion_di_manager.c:160:6:MotionDI_reset_gyro_calibration	8	static
+../Core/Src/motion_di_manager.c:171:6:MotionDI_manager_run	16	static
+../Core/Src/motion_di_manager.c:193:6:MotionDI_manager_get_version	16	static
+../Core/Src/motion_di_manager.c:206:13:float_array_set	32	static

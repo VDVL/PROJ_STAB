@@ -26,9 +26,7 @@
 #include "drv8311.h"
 #include "pwm_driver.h"
 #include "lsm6dso.h"
-
-
-
+#include "motion_di_manager.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -147,8 +145,7 @@ int main(void)
 	acc_IMU = Get_AXIS_GYRO__IMU();
 	gyro_IMU = Get_AXIS_ACC__IMU();
 
-
-
+	MotionDI_manager_init(100);
 	}
   /* USER CODE END 3 */
 }
