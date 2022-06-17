@@ -21,11 +21,13 @@ uint8_t phase_C[] = {val_phase_C};
 
 #define pas_deg sizeof phase_A / sizeof phase_A[0]
 
+
+
 void pwm_sine(void)
 {
 	if(1){//Flag_driver ==1  // appel de la fonction dans le main selon flag créé des accoups sur le moteur
 		Flag_driver =0;
-		if(cpt_pwm >= 10)   				//correspond to 2800us (28*100us)
+		if(cpt_pwm >= speed_periode_DRV)   				//correspond to 2800us (28*100us)
 		{
 			cpt_pwm =0;//reset
 
@@ -63,7 +65,7 @@ void pwm_sine(void)
 
 
 			//if button not pressed: clockwise else counter clockwise
-			if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == 1)
+			if(speed_direction_DRV == 1)
 			{
 				//clockwise direction
 				if(cpt_deg>=pas_deg-1)			//360°
@@ -75,10 +77,10 @@ void pwm_sine(void)
 					cpt_deg++;					//+1°
 				}
 			}
-			else
+			else if(speed_direction_DRV == 0)
 			{
 
-				/*
+
 				//counter clockwise
 				if(cpt_deg<=0)					//0°
 				{
@@ -87,8 +89,11 @@ void pwm_sine(void)
 				else
 				{
 					cpt_deg--;					//-1°
-				}*/
+				}
 
+			}
+			else{
+				//do nothing will stop the motor
 			}
 		}
 		else

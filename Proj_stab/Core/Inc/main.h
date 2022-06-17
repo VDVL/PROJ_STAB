@@ -56,6 +56,9 @@ extern uint8_t buf_SPI_RX[20];
 
 extern uint8_t Flag_compute_fusion;
 extern uint8_t Flag_driver;
+
+extern uint32_t speed_periode_DRV;
+extern uint32_t speed_direction_DRV;   //1 = +         0 = -     2 = stop
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

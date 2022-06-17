@@ -60,19 +60,25 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
-//DRV
+//BUS BUFFERS
 uint8_t buf_I2C_TX[20];
 uint8_t	buf_I2C_RX[20];
 uint8_t buf_Serial_TX[20];
 uint8_t	buf_Serial_RX[20];
-uint8_t buf_SPI_TX[20];
-uint8_t buf_SPI_RX[20];
+uint8_t buf_SPI_TX[20]; 		//driver bus
+uint8_t buf_SPI_RX[20]; 		//driver bus
 
-
+//Fusion datas
 MDI_output_t datas_fusion;
-
 uint8_t Flag_compute_fusion =0;
 uint8_t Flag_driver =0;
+
+//Motor command setting
+
+uint32_t speed_periode_DRV = init_speed_period;
+uint32_t speed_direction_DRV = init_speed_direction;   //1 = +         0 = -     2 = stop
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -146,12 +152,35 @@ int main(void)
 	{
     /* USER CODE END WHILE */
 
-		/* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
 		//pwm_sine();
 		datas_fusion = Fusion_datas();
 
 
-
+		if(datas_fusion.rotation[2] >= 3){
+			if(datas_fusion.gravity[2]<=0){
+				//zone A
+				speed_direction_DRV =1;
+			}
+			else if(datas_fusion.gravity[2]>=0){
+				//zone D
+				speed_direction_DRV =1;
+			}
+		}
+		else if(datas_fusion.rotation[2] <= -3)
+		{
+			if(datas_fusion.gravity[2]<=0){
+				//zone B
+				speed_direction_DRV =0;
+			}
+			else if(datas_fusion.gravity[2]>=0){
+				//zone C
+				speed_direction_DRV =0;
+			}
+		}
+		else{
+			speed_direction_DRV =2;
+		}
 	}
   /* USER CODE END 3 */
 }
@@ -410,7 +439,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 79;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 4999;
+  htim2.Init.Period = 9999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
