@@ -27,7 +27,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -42,7 +41,7 @@
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-
+extern uint8_t Flag_compute_fusion;
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

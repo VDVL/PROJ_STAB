@@ -53,6 +53,9 @@ extern uint8_t buf_Serial_TX[20];
 extern uint8_t	buf_Serial_RX[20];
 extern uint8_t buf_SPI_TX[20];
 extern uint8_t buf_SPI_RX[20];
+
+extern uint8_t Flag_compute_fusion;
+extern uint8_t Flag_driver;
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

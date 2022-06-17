@@ -1,1 +1,2 @@
-../Core/Src/datas_fusion.c:18:6:Fusion_datas_init	8	static
+../Core/Src/datas_fusion.c:30:6:Fusion_datas_init	8	static
+../Core/Src/datas_fusion.c:55:14:Fusion_datas	48	static

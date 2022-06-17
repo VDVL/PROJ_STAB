@@ -20,8 +20,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32l4xx_it.h"
+#include "pwm_driver.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -209,7 +211,7 @@ void TIM2_IRQHandler(void)
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
-
+  Flag_compute_fusion = 1;
   /* USER CODE END TIM2_IRQn 1 */
 }
 
@@ -223,6 +225,7 @@ void TIM3_IRQHandler(void)
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */
+  Flag_driver = 1;
   pwm_sine();
   /* USER CODE END TIM3_IRQn 1 */
 }

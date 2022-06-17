@@ -19,6 +19,8 @@ Core/Src/datas_fusion.o: ../Core/Src/datas_fusion.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h \
@@ -27,12 +29,15 @@ Core/Src/datas_fusion.o: ../Core/Src/datas_fusion.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
- ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
+ ../Core/Inc/lsm6dso.h ../Core/Inc/lsm6dso_reg.h ../Core/Inc/main.h
 C:/Users/be06.BREIZELEC/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-MEMS1/9.2.0/Middlewares/ST/STM32_MotionDI_Library/Inc/motion_di.h:
 ../Core/Inc/motion_di_manager.h:
 ../Core/Inc/main.h:
@@ -54,6 +59,8 @@ C:/Users/be06.BREIZELEC/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-MEM
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h:
@@ -62,9 +69,14 @@ C:/Users/be06.BREIZELEC/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-MEM
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
+../Core/Inc/lsm6dso.h:
+../Core/Inc/lsm6dso_reg.h:
+../Core/Inc/main.h:

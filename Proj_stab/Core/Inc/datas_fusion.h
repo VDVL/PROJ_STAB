@@ -13,7 +13,7 @@
 
 
 void Fusion_datas_init(void);
-void Fusion_datas(void);
+MDI_output_t Fusion_datas(void);
 
 
 #endif /* INC_DATAS_FUSION_H_ */
