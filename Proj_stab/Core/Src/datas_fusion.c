@@ -52,44 +52,37 @@ void Fusion_datas_init(void){
 }
 
 
-MDI_output_t Fusion_datas(void){
+void Fusion_datas(void){
+	/* Get acceleration X/Y/Z in g */
+	acc_IMU = Get_AXIS_ACC__IMU();
+	/* Get angular velocity  X/Y/Z in mdps */
+	gyro_IMU =   Get_AXIS_GYRO__IMU();
 
+	/* Convert acceleration from [mg] to [g] */
+	data_in.Acc[0] = (float)acc_IMU.x * FROM_MG_TO_G;
+	data_in.Acc[1] = (float)acc_IMU.y * FROM_MG_TO_G;
+	data_in.Acc[2] = (float)acc_IMU.z * FROM_MG_TO_G;
 
-	if(Flag_compute_fusion ==1){
+	/* Convert angular velocity from [mdps] to [dps] */
+	data_in.Gyro[0] = (float)gyro_IMU.x * FROM_MG_TO_G;
+	data_in.Gyro[1] = (float)gyro_IMU.y * FROM_MDPS_TO_DPS;
+	data_in.Gyro[2] = (float)gyro_IMU.z * FROM_MDPS_TO_DPS;
 
-		Flag_compute_fusion =0;
-		Flag_compute_PID =1; //activate computation for PID
+	//Increment sample time
+	data_in.Timestamp = Timestamp;
+	Timestamp += ALGO_PERIOD;
 
-		/* Get acceleration X/Y/Z in g */
-		acc_IMU = Get_AXIS_ACC__IMU();
-		/* Get angular velocity  X/Y/Z in mdps */
-		gyro_IMU =   Get_AXIS_GYRO__IMU();
+	/* Run Dynamic Inclinometer algorithm */
+	MotionDI_update(&data_out, &data_in);
 
-		/* Convert acceleration from [mg] to [g] */
-		data_in.Acc[0] = (float)acc_IMU.x * FROM_MG_TO_G;
-		data_in.Acc[1] = (float)acc_IMU.y * FROM_MG_TO_G;
-		data_in.Acc[2] = (float)acc_IMU.z * FROM_MG_TO_G;
-
-		/* Convert angular velocity from [mdps] to [dps] */
-		data_in.Gyro[0] = (float)gyro_IMU.x * FROM_MG_TO_G;
-		data_in.Gyro[1] = (float)gyro_IMU.y * FROM_MDPS_TO_DPS;
-		data_in.Gyro[2] = (float)gyro_IMU.z * FROM_MDPS_TO_DPS;
-
-		//Increment sample time
-		data_in.Timestamp = Timestamp;
-		Timestamp += ALGO_PERIOD;
-
-		/* Run Dynamic Inclinometer algorithm */
-		MotionDI_update(&data_out, &data_in);
-
-
-	}
-	return data_out;
+	Regulator_inputs.mesure =from_90_to_180();
 }
 
 // Change scale in degrees of roll, from [-90 +90] to [-180 +180]
-float from_90_to_180(float roll_90,float gravity){
+float from_90_to_180(void){
 	float roll_180=0;
+	float roll_90 = data_out.rotation[2];
+	float gravity = data_out.gravity[2];
 
 	if(roll_90 < 0){
 		if(gravity < 0){		//zone A

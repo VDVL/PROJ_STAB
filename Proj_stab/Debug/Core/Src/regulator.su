@@ -1,1 +1,4 @@
-../Core/Src/regulator.c:17:20:Proportional	24	static
+../Core/Src/regulator.c:17:6:Init_PID	4	static
+../Core/Src/regulator.c:23:6:Proportional	8	static
+../Core/Src/regulator.c:62:6:PI	16	static
+../Core/Src/regulator.c:103:6:PID	16	static

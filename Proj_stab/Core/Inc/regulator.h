@@ -11,20 +11,58 @@
 #include <stdio.h>
 
 
-#define setpoint 	0
-#define Kp			0.008
+#define max_period		1000000000
+#define min_period		3
+
+#define Kp			0.03  //0.02
+#define Ki 			0.0000000001
+#define Kd			0.001
 
 
 typedef struct
 {
-	uint32_t speed_periode;
+	uint32_t speed_period;
 	uint32_t speed_direction;
-} REGULATOR_commands;
+}REGULATOR_commands;
+
+typedef struct
+{
+	float mesure;
+	float consigne;
+}REGULATOR_inputs;
+
+
+typedef struct
+{
+	float error;
+	float command;
+	float period;
+}REGULATOR_P_controls;
+
+
+typedef struct
+{
+	float error;
+	float error_sum;
+	float command;
+	float period;
+}REGULATOR_PI_controls;
+
+
+typedef struct
+{
+	float error;
+	float error_sum;
+	float last_error;
+	float command;
+	float error_variation;
+	float period;
+}REGULATOR_PID_controls;
 
 
 
-REGULATOR_commands Proportional(float);
-
-
+void Proportional(void);
+void PI(void);
+void PID(void);
 
 #endif /* INC_REGULATOR_H_ */

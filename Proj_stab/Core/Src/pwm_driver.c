@@ -25,7 +25,7 @@ uint8_t phase_C[] = {val_phase_C};
 
 void pwm_sine(void)
 {
-	if(cpt_pwm >= comand_speed_periode)   				//correspond to 2800us (28*100us)
+	if(cpt_pwm >= comand_speed_period)   				//correspond to 2800us (28*100us)
 	{
 		cpt_pwm =0;//reset
 

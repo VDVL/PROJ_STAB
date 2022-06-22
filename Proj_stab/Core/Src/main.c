@@ -21,14 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <string.h>
-#include <stdio.h>
-#include "drv8311.h"
-#include "pwm_driver.h"
-#include "motion_di_manager.h"
-#include "datas_fusion.h"
-#include "pwm_driver.h"
-#include "regulator.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -71,17 +64,11 @@ uint8_t buf_SPI_RX[20]; 		//driver bus
 
 //Fusion datas
 MDI_output_t datas_fusion;
-uint8_t Flag_compute_fusion =0;
-uint8_t Flag_compute_PID =0;
-uint8_t Flag_driver =0;
-
 
 //Motor command setting
-
-uint32_t comand_speed_periode = init_speed_period;
+uint32_t comand_speed_period = init_speed_period;
 uint32_t command_direction = init_speed_direction;   //1 = +         0 = -     2 = stop
-
-float mesure_roll =0;
+REGULATOR_inputs Regulator_inputs;
 
 
 /* USER CODE END PV */
@@ -149,6 +136,9 @@ int main(void)
   //INTERRUPTS
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start_IT(&htim2);
+
+  Init_PID();
+  Regulator_inputs.consigne = 90;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -158,14 +148,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		//pwm_sine();
 
-		datas_fusion = Fusion_datas();
+		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		HAL_Delay(25);
 
-		mesure_roll =  from_90_to_180(datas_fusion.rotation[2], datas_fusion.gravity[2]);
-		REGULATOR_commands commands = Proportional(mesure_roll);
-		comand_speed_periode = commands.speed_periode;
-		command_direction = commands.speed_direction;
 	}
   /* USER CODE END 3 */
 }

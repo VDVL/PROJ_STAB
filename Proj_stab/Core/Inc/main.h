@@ -28,10 +28,17 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal.h"
-
+#include <string.h>
+#include <stdio.h>
+#include "drv8311.h"
+#include "pwm_driver.h"
+#include "motion_di_manager.h"
+#include "datas_fusion.h"
+#include "pwm_driver.h"
+#include "regulator.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "motion_di_manager.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -54,12 +61,11 @@ extern uint8_t	buf_Serial_RX[20];
 extern uint8_t buf_SPI_TX[20];
 extern uint8_t buf_SPI_RX[20];
 
-extern uint8_t Flag_compute_fusion;
-extern uint8_t Flag_compute_PID;
-extern uint8_t Flag_driver;
-
-extern uint32_t comand_speed_periode;
+extern MDI_output_t datas_fusion;
+extern REGULATOR_inputs Regulator_inputs;
+extern uint32_t comand_speed_period;
 extern uint32_t command_direction;   //1 = +         0 = -     2 = stop
+
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

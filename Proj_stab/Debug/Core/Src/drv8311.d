@@ -35,6 +35,10 @@ Core/Src/drv8311.o: ../Core/Src/drv8311.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
+ ../Core/Inc/drv8311.h ../Core/Inc/pwm_driver.h \
+ ../Core/Inc/motion_di_manager.h \
+ C:/Users/be06.BREIZELEC/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-MEMS1/9.2.0/Middlewares/ST/STM32_MotionDI_Library/Inc/motion_di.h \
+ ../Core/Inc/main.h ../Core/Inc/datas_fusion.h ../Core/Inc/regulator.h \
  ../Core/Inc/drv8311.h ../Core/Inc/pwm_driver.h
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
@@ -73,5 +77,12 @@ Core/Src/drv8311.o: ../Core/Src/drv8311.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
+../Core/Inc/drv8311.h:
+../Core/Inc/pwm_driver.h:
+../Core/Inc/motion_di_manager.h:
+C:/Users/be06.BREIZELEC/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-MEMS1/9.2.0/Middlewares/ST/STM32_MotionDI_Library/Inc/motion_di.h:
+../Core/Inc/main.h:
+../Core/Inc/datas_fusion.h:
+../Core/Inc/regulator.h:
 ../Core/Inc/drv8311.h:
 ../Core/Inc/pwm_driver.h:
