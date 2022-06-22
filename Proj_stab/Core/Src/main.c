@@ -28,6 +28,7 @@
 #include "motion_di_manager.h"
 #include "datas_fusion.h"
 #include "pwm_driver.h"
+#include "regulator.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -71,12 +72,16 @@ uint8_t buf_SPI_RX[20]; 		//driver bus
 //Fusion datas
 MDI_output_t datas_fusion;
 uint8_t Flag_compute_fusion =0;
+uint8_t Flag_compute_PID =0;
 uint8_t Flag_driver =0;
+
 
 //Motor command setting
 
-uint32_t speed_periode_DRV = init_speed_period;
-uint32_t speed_direction_DRV = init_speed_direction;   //1 = +         0 = -     2 = stop
+uint32_t comand_speed_periode = init_speed_period;
+uint32_t command_direction = init_speed_direction;   //1 = +         0 = -     2 = stop
+
+float mesure_roll =0;
 
 
 /* USER CODE END PV */
@@ -154,33 +159,13 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		//pwm_sine();
+
 		datas_fusion = Fusion_datas();
 
-
-		if(datas_fusion.rotation[2] >= 3){
-			if(datas_fusion.gravity[2]<=0){
-				//zone A
-				speed_direction_DRV =1;
-			}
-			else if(datas_fusion.gravity[2]>=0){
-				//zone D
-				speed_direction_DRV =1;
-			}
-		}
-		else if(datas_fusion.rotation[2] <= -3)
-		{
-			if(datas_fusion.gravity[2]<=0){
-				//zone B
-				speed_direction_DRV =0;
-			}
-			else if(datas_fusion.gravity[2]>=0){
-				//zone C
-				speed_direction_DRV =0;
-			}
-		}
-		else{
-			speed_direction_DRV =2;
-		}
+		mesure_roll =  from_90_to_180(datas_fusion.rotation[2], datas_fusion.gravity[2]);
+		REGULATOR_commands commands = Proportional(mesure_roll);
+		comand_speed_periode = commands.speed_periode;
+		command_direction = commands.speed_direction;
 	}
   /* USER CODE END 3 */
 }

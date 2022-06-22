@@ -25,82 +25,76 @@ uint8_t phase_C[] = {val_phase_C};
 
 void pwm_sine(void)
 {
-	if(1){//Flag_driver ==1  // appel de la fonction dans le main selon flag créé des accoups sur le moteur
-		Flag_driver =0;
-		if(cpt_pwm >= speed_periode_DRV)   				//correspond to 2800us (28*100us)
+	if(cpt_pwm >= comand_speed_periode)   				//correspond to 2800us (28*100us)
+	{
+		cpt_pwm =0;//reset
+
+		//Set PWM duty_cycle A   (reset = 0x0000 )
+		//fill TX buffer for SPI--------------------------------------------
+		buf_SPI_TX[0] = 0x00;               					//cmd
+		buf_SPI_TX[1] = 0x00 | (DRV8311_REG_PWMG_A_DUTY <<3);  	//reg adr + cmd
+		buf_SPI_TX[2] = 0x00;				//data (si read osf)
+		buf_SPI_TX[3] = phase_A[cpt_deg];									//data (si read osf)
+		//Send/Read Datas---------------------------------------------------
+		HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_RESET);
+		HAL_SPI_TransmitReceive(&hspi2, (uint8_t *)buf_SPI_TX, (uint8_t *)buf_SPI_RX, 4, HAL_MAX_DELAY);  //trame de 32bits=4octets
+		HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_SET);
+		//Set PWM duty_cycle B   (reset = 0x0000 )
+		//fill TX buffer for SPI--------------------------------------------
+		buf_SPI_TX[0] = 0x00;               					//cmd
+		buf_SPI_TX[1] = 0x00 | (DRV8311_REG_PWMG_B_DUTY <<3);  	//reg adr + cmd
+		buf_SPI_TX[2] = 0x00;				//data (si read osf)
+		buf_SPI_TX[3] = phase_B[cpt_deg];									//data (si read osf)
+		//Send/Read Datas---------------------------------------------------
+		HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_RESET);
+		HAL_SPI_TransmitReceive(&hspi2, (uint8_t *)buf_SPI_TX, (uint8_t *)buf_SPI_RX, 4, HAL_MAX_DELAY);  //trame de 32bits=4octets
+		HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_SET);
+
+		//Set PWM duty_cycle C   (reset = 0x0000 )
+		//fill TX buffer for SPI--------------------------------------------
+		buf_SPI_TX[0] = 0x00;               					//cmd
+		buf_SPI_TX[1] = 0x00 | (DRV8311_REG_PWMG_C_DUTY <<3);  	//reg adr + cmd
+		buf_SPI_TX[2] = 0x00;				//data (si read osf)
+		buf_SPI_TX[3] = phase_C[cpt_deg];									//data (si read osf)
+		//Send/Read Datas---------------------------------------------------
+		HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_RESET);
+		HAL_SPI_TransmitReceive(&hspi2, (uint8_t *)buf_SPI_TX, (uint8_t *)buf_SPI_RX, 4, HAL_MAX_DELAY);  //trame de 32bits=4octets
+		HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_SET);
+
+
+		//if button not pressed: clockwise else counter clockwise
+		if(command_direction == 1)
 		{
-			cpt_pwm =0;//reset
-
-			//Set PWM duty_cycle A   (reset = 0x0000 )
-			//fill TX buffer for SPI--------------------------------------------
-			buf_SPI_TX[0] = 0x00;               					//cmd
-			buf_SPI_TX[1] = 0x00 | (DRV8311_REG_PWMG_A_DUTY <<3);  	//reg adr + cmd
-			buf_SPI_TX[2] = 0x00;				//data (si read osf)
-			buf_SPI_TX[3] = phase_A[cpt_deg];									//data (si read osf)
-			//Send/Read Datas---------------------------------------------------
-			HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_RESET);
-			HAL_SPI_TransmitReceive(&hspi2, (uint8_t *)buf_SPI_TX, (uint8_t *)buf_SPI_RX, 4, HAL_MAX_DELAY);  //trame de 32bits=4octets
-			HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_SET);
-			//Set PWM duty_cycle B   (reset = 0x0000 )
-			//fill TX buffer for SPI--------------------------------------------
-			buf_SPI_TX[0] = 0x00;               					//cmd
-			buf_SPI_TX[1] = 0x00 | (DRV8311_REG_PWMG_B_DUTY <<3);  	//reg adr + cmd
-			buf_SPI_TX[2] = 0x00;				//data (si read osf)
-			buf_SPI_TX[3] = phase_B[cpt_deg];									//data (si read osf)
-			//Send/Read Datas---------------------------------------------------
-			HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_RESET);
-			HAL_SPI_TransmitReceive(&hspi2, (uint8_t *)buf_SPI_TX, (uint8_t *)buf_SPI_RX, 4, HAL_MAX_DELAY);  //trame de 32bits=4octets
-			HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_SET);
-
-			//Set PWM duty_cycle C   (reset = 0x0000 )
-			//fill TX buffer for SPI--------------------------------------------
-			buf_SPI_TX[0] = 0x00;               					//cmd
-			buf_SPI_TX[1] = 0x00 | (DRV8311_REG_PWMG_C_DUTY <<3);  	//reg adr + cmd
-			buf_SPI_TX[2] = 0x00;				//data (si read osf)
-			buf_SPI_TX[3] = phase_C[cpt_deg];									//data (si read osf)
-			//Send/Read Datas---------------------------------------------------
-			HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_RESET);
-			HAL_SPI_TransmitReceive(&hspi2, (uint8_t *)buf_SPI_TX, (uint8_t *)buf_SPI_RX, 4, HAL_MAX_DELAY);  //trame de 32bits=4octets
-			HAL_GPIO_WritePin(SPI2_SS_GPIO_Port, SPI2_SS_Pin, GPIO_PIN_SET);
-
-
-			//if button not pressed: clockwise else counter clockwise
-			if(speed_direction_DRV == 1)
+			//clockwise direction
+			if(cpt_deg>=pas_deg-1)			//360°
 			{
-				//clockwise direction
-				if(cpt_deg>=pas_deg-1)			//360°
-				{
-					cpt_deg =0;					//reset cpt °
-				}
-				else
-				{
-					cpt_deg++;					//+1°
-				}
+				cpt_deg =0;					//reset cpt °
 			}
-			else if(speed_direction_DRV == 0)
+			else
 			{
-
-
-				//counter clockwise
-				if(cpt_deg<=0)					//0°
-				{
-					cpt_deg = pas_deg-1;		//reset cpt °
-				}
-				else
-				{
-					cpt_deg--;					//-1°
-				}
-
-			}
-			else{
-				//do nothing will stop the motor
+				cpt_deg++;					//+1°
 			}
 		}
-		else
+		else if(command_direction == 0)
 		{
-			cpt_pwm++;
+			//counter clockwise
+			if(cpt_deg<=0)					//0°
+			{
+				cpt_deg = pas_deg-1;		//reset cpt °
+			}
+			else
+			{
+				cpt_deg--;					//-1°
+			}
 		}
-		//HAL_GPIO_TogglePin(PWM_timer_GPIO_Port, PWM_timer_Pin);
+		else{
+			//do nothing will stop the motor
+		}
 	}
+	else
+	{
+		cpt_pwm++;
+	}
+	//HAL_GPIO_TogglePin(PWM_timer_GPIO_Port, PWM_timer_Pin);
 }
 

@@ -58,6 +58,7 @@ MDI_output_t Fusion_datas(void){
 	if(Flag_compute_fusion ==1){
 
 		Flag_compute_fusion =0;
+		Flag_compute_PID =1; //activate computation for PID
 
 		/* Get acceleration X/Y/Z in g */
 		acc_IMU = Get_AXIS_ACC__IMU();
@@ -84,4 +85,29 @@ MDI_output_t Fusion_datas(void){
 
 	}
 	return data_out;
+}
+
+// Change scale in degrees of roll, from [-90 +90] to [-180 +180]
+float from_90_to_180(float roll_90,float gravity){
+	float roll_180=0;
+
+	if(roll_90 < 0){
+		if(gravity < 0){		//zone A
+			roll_180 = roll_90;
+		}
+		else{ 					//zone D
+			roll_180 = -90 - (90 + roll_90);
+		}
+	}
+	else
+	{
+		if(gravity < 0){		//zone B
+			roll_180 = roll_90;
+		}
+		else{					//zone C
+			roll_180 = 90 + (90 -roll_90);
+		}
+	}
+
+	return roll_180;
 }
