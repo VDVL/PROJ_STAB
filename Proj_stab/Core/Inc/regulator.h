@@ -11,12 +11,14 @@
 #include <stdio.h>
 
 
-#define max_period		1000000000
-#define min_period		3
+#define max_period		100000000000
+#define min_period		2
 
-#define Kp			0.03  //0.02
-#define Ki 			0.0000000001
+#define Kp			0.03  //0.04
+#define Ki 			0.0000001
 #define Kd			0.001
+
+
 
 
 typedef struct

@@ -138,7 +138,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
 
   Init_PID();
-  Regulator_inputs.consigne = 90;
+  Regulator_inputs.consigne = 180;
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -213,6 +213,7 @@ void TIM2_IRQHandler(void)
   Fusion_datas();
   //Proportional();
   PID();
+  //Proportional();
 
   /* USER CODE END TIM2_IRQn 1 */
 }

@@ -46,10 +46,10 @@ void Proportional(void){
 
 	//Give direction of motor
 	if(P_param.error >0){
-		commands.speed_direction =0; 								//0 = Counter Clockwise
+		commands.speed_direction =1; 								//0 = Counter Clockwise
 	}
 	else{
-		commands.speed_direction =1;								//1 = Clockwise
+		commands.speed_direction =0;								//1 = Clockwise
 	}
 
 	//Copy values to global var
@@ -86,10 +86,10 @@ void PI(void){
 
 	//Give direction of motor
 	if(PI_param.error >0){
-		commands.speed_direction =0; 								//0 = Counter Clockwise
+		commands.speed_direction =1; 								//0 = Counter Clockwise
 	}
 	else{
-		commands.speed_direction =1;								//1 = Clockwise
+		commands.speed_direction =0;								//1 = Clockwise
 	}
 
 	//Copy values to global var
@@ -129,10 +129,10 @@ void PID(void){
 
 	//Give direction of motor
 	if(PID_param.command >0){
-		commands.speed_direction =0; 								//0 = Counter Clockwise
+		commands.speed_direction =1; 								//0 = Counter Clockwise
 	}
 	else{
-		commands.speed_direction =1;								//1 = Clockwise
+		commands.speed_direction =0;								//1 = Clockwise
 	}
 
 	//Copy values to global var

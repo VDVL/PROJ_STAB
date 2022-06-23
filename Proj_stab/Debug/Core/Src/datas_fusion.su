@@ -1,3 +1,4 @@
 ../Core/Src/datas_fusion.c:30:6:Fusion_datas_init	8	static
 ../Core/Src/datas_fusion.c:55:6:Fusion_datas	40	static
 ../Core/Src/datas_fusion.c:82:7:from_90_to_180	24	static
+../Core/Src/datas_fusion.c:111:7:from_90_to_360	24	static

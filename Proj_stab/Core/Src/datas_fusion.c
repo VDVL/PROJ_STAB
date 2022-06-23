@@ -75,7 +75,7 @@ void Fusion_datas(void){
 	/* Run Dynamic Inclinometer algorithm */
 	MotionDI_update(&data_out, &data_in);
 
-	Regulator_inputs.mesure =from_90_to_180();
+	Regulator_inputs.mesure =from_90_to_360();
 }
 
 // Change scale in degrees of roll, from [-90 +90] to [-180 +180]
@@ -103,4 +103,33 @@ float from_90_to_180(void){
 	}
 
 	return roll_180;
+}
+
+
+
+// Change scale in degrees of roll, from [-90 +90] to [0 to 360]
+float from_90_to_360(void){
+	float roll_360=0;
+	float roll_90 = data_out.rotation[2];
+	float gravity = data_out.gravity[2];
+
+	if(roll_90 > 0){
+		if(gravity < 0){		//zone A
+			roll_360 = 270 + (90-roll_90);
+		}
+		else{ 					//zone D
+			roll_360 = 180 + roll_90;
+		}
+	}
+	else
+	{
+		if(gravity < 0){		//zone B
+			roll_360 = -roll_90;
+		}
+		else{					//zone C
+			roll_360 = 90 + (90+roll_90);
+		}
+	}
+
+	return roll_360;
 }
